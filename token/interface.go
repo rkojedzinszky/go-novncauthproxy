@@ -4,8 +4,8 @@ import "net/http"
 
 // ControlRequest contains VNC server data
 type ControlRequest struct {
-	Destination string  `json:"daddr"`
-	Password    *string `json:"pwd"`
+	Destination string `json:"a"`
+	Password    string `json:"p"`
 }
 
 // Parser interface extracts ControlRequest token

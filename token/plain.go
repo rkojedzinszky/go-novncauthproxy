@@ -26,7 +26,7 @@ func (p plainParser) ExtractControlRequest(r *http.Request) (*ControlRequest, er
 		Destination: data[0],
 	}
 	if len(data) >= 2 {
-		control.Password = &data[1]
+		control.Password = data[1]
 	}
 
 	return control, nil

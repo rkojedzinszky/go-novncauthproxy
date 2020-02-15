@@ -45,6 +45,8 @@ func (p Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logrus.Debug(r.RemoteAddr, ": received token:", token)
+
 	clientConn, err := wsUpgrader.Upgrade(w, r, nil)
 	if err != nil {
 		return

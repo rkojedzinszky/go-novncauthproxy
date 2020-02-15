@@ -21,7 +21,7 @@ type claims struct {
 	// Public claims
 	jwt.Claims
 
-	Control ControlRequest `json:"ctrl"`
+	Control ControlRequest `json:"vnc"`
 }
 
 func (j jweParser) ExtractControlRequest(r *http.Request) (*ControlRequest, error) {

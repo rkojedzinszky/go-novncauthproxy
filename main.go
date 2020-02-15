@@ -15,8 +15,11 @@ func main() {
 	jweSecret := flag.String("jwe-secret", "", "Secret used for encrypting JWEs")
 	plain := flag.Bool("plain", false, "Use plain URI parser. Not for production use!")
 	uri := flag.String("uri", "/novnc/", "Base URI for handling WS requests")
+	logLevel := flag.Int("log-level", int(logrus.InfoLevel), "Logging level")
 
 	flag.Parse()
+
+	logrus.SetLevel(logrus.Level(*logLevel))
 
 	var parser token.Parser
 	if *plain {

@@ -42,7 +42,7 @@ func newRfbProxy(client *websocket.Conn, server net.Conn) rfbProxy {
 	}
 }
 
-func (p rfbProxy) rfbHandshake(serverPassword *string) error {
+func (p rfbProxy) rfbHandshake(serverPassword string) error {
 	// Set up handshake timeouts
 	deadline := time.Now().Add(5 * time.Second)
 	p.server.setdeadline(deadline)
@@ -113,7 +113,7 @@ func (p rfbProxy) rfbHandshake(serverPassword *string) error {
 
 	secType := authInvalid
 	for _, sec := range secTypes {
-		if sec == authNone || (sec == authVNC && serverPassword != nil) {
+		if sec == authNone || (sec == authVNC && serverPassword != "") {
 			secType = sec
 			break
 		}
@@ -139,7 +139,7 @@ func (p rfbProxy) rfbHandshake(serverPassword *string) error {
 			return err
 		}
 
-		response := vncencrypt(*serverPassword, challenge)
+		response := vncencrypt(serverPassword, challenge)
 
 		if err = p.server.write(response); err != nil {
 			return err
