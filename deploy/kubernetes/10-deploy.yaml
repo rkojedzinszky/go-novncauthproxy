@@ -1,0 +1,33 @@
+# Deployments
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: go-novncauthproxy
+  name: go-novncauthproxy
+spec:
+  selector:
+    matchLabels:
+      app: go-novncauthproxy
+  template:
+    metadata:
+      labels:
+        app: go-novncauthproxy
+    spec:
+      enableServiceLinks: false
+      containers:
+      - image: rkojedzinszky/go-novncauthproxy
+        name: go-novncauthproxy
+        envFrom:
+        - secretRef:
+            name: go-novncauthproxy-jwe-token
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 16M
+      securityContext:
+        runAsNonRoot: true

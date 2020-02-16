@@ -1,0 +1,16 @@
+# Ingresses
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: go-novncauthproxy
+spec:
+  rules:
+  # Fill in correct hostname
+  - host: go-novncauthproxy.host.name.local
+    http:
+      paths:
+      - backend:
+          serviceName: go-novncauthproxy
+          servicePort: http
+        path: /novnc/

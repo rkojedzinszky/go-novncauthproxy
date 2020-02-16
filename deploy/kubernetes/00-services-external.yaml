@@ -1,0 +1,12 @@
+# Services used externally
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-novncauthproxy
+spec:
+  ports:
+  - name: http
+    port: 8080
+  selector:
+    app: go-novncauthproxy
