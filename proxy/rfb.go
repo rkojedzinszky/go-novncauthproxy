@@ -50,8 +50,6 @@ func (p rfbProxy) rfbHandshake(serverPassword string) error {
 	defer p.client.setdeadline(time.Time{})
 	defer p.server.setdeadline(time.Time{})
 
-	p.logger.Logger.SetLevel(logrus.DebugLevel)
-
 	rawProtocolVersion, err := p.server.read(12)
 	if err != nil {
 		return err
