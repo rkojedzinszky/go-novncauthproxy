@@ -37,7 +37,7 @@ func (j jweParser) ExtractControlRequest(r *http.Request) (*ControlRequest, erro
 		return nil, fmt.Errorf("Jose claims: %+v", err)
 	}
 
-	if err := claims.Validate(jwt.Expected{Time: time.Now()}); err != nil {
+	if err := claims.ValidateWithLeeway(jwt.Expected{Time: time.Now()}, 0); err != nil {
 		return nil, fmt.Errorf("Jose validate: %+v", err)
 	}
 
