@@ -21,7 +21,7 @@ VyA/BvPHJTJEt2EZv3PVPuM4xEXFL+dS5KCOiWKz4MM=
 
 All flags can be passed as environment variables, so running with Docker is easy too:
 ```
-$ docker run -it --rm -e JWE_SECRET=lz2jVFPT36rk3Vak11dTSNRBQ0NEH/0sYt3Q2yVOnI4= -p 8080:8080 rkojedzinszky/go-novncauthproxy
+$ docker run -it --rm -e JWE_SECRET=lz2jVFPT36rk3Vak11dTSNRBQ0NEH/0sYt3Q2yVOnI4= -p 8080:8080 ghcr.io/rkojedzinszky/go-novncauthproxy
 ```
 
 ## Kubernetes

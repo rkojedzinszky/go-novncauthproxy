@@ -1,0 +1,22 @@
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+
+steps:
+- name: build
+  image: golang
+  commands:
+  - CGO_ENABLED=0 go build .
+  - strip -s go-novncauthproxy
+
+- name: docker
+  image: plugins/docker
+  settings:
+    repo: ghcr.io/rkojedzinszky/go-novncauthproxy
+    registry: ghcr.io
+    username: rkojedzinszky
+    password:
+      from_secret: ghcr.io.password
+    auto_tag: true
