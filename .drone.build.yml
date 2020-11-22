@@ -6,13 +6,14 @@ platform:
 
 steps:
 - name: build
-  image: golang
+  image: golang:1.15-alpine
   commands:
   - CGO_ENABLED=0 go build .
+  - apk --no-cache add binutils
   - strip -s go-novncauthproxy
 
 - name: docker
-  image: plugins/docker
+  image: plugins/docker:19
   settings:
     repo: ghcr.io/rkojedzinszky/go-novncauthproxy
     registry: ghcr.io

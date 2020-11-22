@@ -4,10 +4,10 @@ kind: pipeline
 name: build-arm64
 platform: {arch: arm64, os: linux, variant: v8}
 steps:
-- commands: [CGO_ENABLED=0 go build ., strip -s go-novncauthproxy]
-  image: golang
+- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
+  image: golang:1.15-alpine
   name: build
-- image: plugins/docker
+- image: plugins/docker:19
   name: docker
   settings:
     auto_tag: true
@@ -22,10 +22,10 @@ kind: pipeline
 name: build-arm
 platform: {arch: arm, os: linux, variant: v7}
 steps:
-- commands: [CGO_ENABLED=0 go build ., strip -s go-novncauthproxy]
-  image: golang
+- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
+  image: golang:1.15-alpine
   name: build
-- image: plugins/docker
+- image: plugins/docker:19
   name: docker
   settings:
     auto_tag: true
@@ -40,10 +40,10 @@ kind: pipeline
 name: build-amd64
 platform: {arch: amd64, os: linux}
 steps:
-- commands: [CGO_ENABLED=0 go build ., strip -s go-novncauthproxy]
-  image: golang
+- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
+  image: golang:1.15-alpine
   name: build
-- image: plugins/docker
+- image: plugins/docker:19
   name: docker
   settings:
     auto_tag: true
