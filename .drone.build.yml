@@ -21,3 +21,5 @@ steps:
     password:
       from_secret: ghcr.io.password
     auto_tag: true
+    mirror:
+      from_secret: hub_docker_mirror
