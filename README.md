@@ -1,7 +1,7 @@
 # go-novncauthproxy
 
 A novnc proxy inspired on [snf-vncauthproxy](https://github.com/grnet/snf-vncauthproxy), but handles VNC connections over Websocket only. The target host/password is encoded in a JWE token, which is passed in the URI.
-Thus, multiple instances can be run (e.g. in Kubernetes).
+Thus the application is stateless, multiple instances can be run (e.g. in Kubernetes).
 
 # Usage
 
