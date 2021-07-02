@@ -31,7 +31,10 @@ func main() {
 		if err != nil {
 			logrus.Fatal(err)
 		}
-		parser = token.NewJWEParser(skey)
+		parser, err = token.NewJWEParser(skey)
+		if err != nil {
+			logrus.Fatal(err)
+		}
 	}
 
 	p := proxy.NewProxy(parser)

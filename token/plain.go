@@ -14,9 +14,7 @@ func NewPlainParser() Parser {
 	return plainParser{}
 }
 
-func (p plainParser) ExtractControlRequest(r *http.Request) (*ControlRequest, error) {
-	token := lastURIComponent(r)
-
+func (p plainParser) Decode(token string) (*ControlRequest, error) {
 	data := strings.Split(token, ",")
 	if len(data) < 1 || data[0] == "" {
 		return nil, fmt.Errorf("plainParser: error parsing")
@@ -30,4 +28,8 @@ func (p plainParser) ExtractControlRequest(r *http.Request) (*ControlRequest, er
 	}
 
 	return control, nil
+}
+
+func (p plainParser) ExtractControlRequest(r *http.Request) (*ControlRequest, error) {
+	return p.Decode(lastURIComponent(r))
 }
