@@ -1,11 +1,10 @@
 kind: pipeline
 name: manifest
-
-platform:
-  os: linux
+type: kubernetes
 
 steps:
 - image: plugins/manifest
+  pull: always
   settings:
     auto_tag: true
     username: rkojedzinszky

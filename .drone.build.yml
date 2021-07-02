@@ -1,19 +1,19 @@
 kind: pipeline
 name: default
-
-platform:
-  os: linux
+type: kubernetes
 
 steps:
 - name: build
-  image: golang:1.15-alpine
+  image: golang:1.16-alpine
+  pull: always
   commands:
   - CGO_ENABLED=0 go build .
   - apk --no-cache add binutils
   - strip -s go-novncauthproxy
 
 - name: docker
-  image: plugins/docker:19
+  image: plugins/docker
+  pull: always
   settings:
     repo: ghcr.io/rkojedzinszky/go-novncauthproxy
     registry: ghcr.io
@@ -23,3 +23,12 @@ steps:
     auto_tag: true
     mirror:
       from_secret: hub_docker_mirror
+
+  privileged: true
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+volumes:
+  - name: docker
+    temp: {}
