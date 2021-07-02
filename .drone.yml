@@ -5,8 +5,8 @@ name: build-arm64
 node_selector: {kubernetes.io/arch: arm64}
 platform: {arch: arm64, os: linux, variant: v8}
 steps:
-- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
-  image: golang:1.16-alpine
+- commands: [go test -v ./..., CGO_ENABLED=0 go build -ldflags -s .]
+  image: golang:1.16
   name: build
   pull: always
 - image: plugins/docker
@@ -34,8 +34,8 @@ name: build-arm
 node_selector: {kubernetes.io/arch: arm}
 platform: {arch: arm, os: linux, variant: v7}
 steps:
-- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
-  image: golang:1.16-alpine
+- commands: [go test -v ./..., CGO_ENABLED=0 go build -ldflags -s .]
+  image: golang:1.16
   name: build
   pull: always
 - image: plugins/docker
@@ -63,8 +63,8 @@ name: build-amd64
 node_selector: {kubernetes.io/arch: amd64}
 platform: {arch: amd64, os: linux}
 steps:
-- commands: [CGO_ENABLED=0 go build ., apk --no-cache add binutils, strip -s go-novncauthproxy]
-  image: golang:1.16-alpine
+- commands: [go test -v ./..., CGO_ENABLED=0 go build -ldflags -s .]
+  image: golang:1.16
   name: build
   pull: always
 - image: plugins/docker

@@ -4,12 +4,11 @@ type: kubernetes
 
 steps:
 - name: build
-  image: golang:1.16-alpine
+  image: golang:1.16
   pull: always
   commands:
-  - CGO_ENABLED=0 go build .
-  - apk --no-cache add binutils
-  - strip -s go-novncauthproxy
+  - go test -v ./...
+  - CGO_ENABLED=0 go build -ldflags -s .
 
 - name: docker
   image: plugins/docker
