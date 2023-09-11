@@ -49,11 +49,13 @@ func (p Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	clientConn, err := wsUpgrader.Upgrade(w, r, nil)
 	if err != nil {
+		logrus.Error("Failed to upgrade to websocket: ", err)
 		return
 	}
 
 	serverConn, err := tcpDialer.Dial("tcp", token.Destination)
 	if err != nil {
+		logrus.Error("Failed to connect to server: ", err)
 		clientConn.Close()
 		return
 	}
