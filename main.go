@@ -17,6 +17,7 @@ func main() {
 	uri := flag.String("uri", "/novnc/", "Base URI for handling WS requests")
 	logLevel := flag.Int("log-level", int(logrus.InfoLevel), "Logging level")
 
+	flag.String(flag.DefaultConfigFlagname, "", "path to config file")
 	flag.Parse()
 
 	logrus.SetLevel(logrus.Level(*logLevel))
