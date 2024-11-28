@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"gopkg.in/square/go-jose.v2"
-	"gopkg.in/square/go-jose.v2/jwt"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 )
 
 var (
@@ -35,7 +35,7 @@ type claims struct {
 }
 
 func (j jwe) Decode(token string) (*ControlRequest, error) {
-	object, err := jwt.ParseEncrypted(token)
+	object, err := jwt.ParseEncrypted(token, []jose.KeyAlgorithm{jose.A256KW, jose.DIRECT}, []jose.ContentEncryption{jose.A256CBC_HS512, jose.A256GCM})
 	if err != nil {
 		return nil, fmt.Errorf("Jose parse: %+v", err)
 	}
@@ -89,7 +89,7 @@ func (j jweencoder) EncodeWithExpiry(control *ControlRequest, exp time.Time) str
 			Expiry: jwt.NewNumericDate(exp),
 		},
 		Control: *control,
-	}).CompactSerialize()
+	}).Serialize()
 
 	return token
 }
