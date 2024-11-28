@@ -66,9 +66,9 @@ func NewJWEEncoder(key []byte) (Encoder, error) {
 	}
 
 	encrypter, err := jose.NewEncrypter(
-		jose.A256CBC_HS512,
+		jose.A256GCM,
 		jose.Recipient{
-			Algorithm: jose.A256KW,
+			Algorithm: jose.DIRECT,
 			Key:       key,
 		},
 		nil,
