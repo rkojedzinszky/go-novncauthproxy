@@ -3,30 +3,30 @@ name: default
 type: kubernetes
 
 steps:
-- name: build
-  image: golang:1.16
-  pull: always
-  commands:
-  - go test -v ./...
-  - CGO_ENABLED=0 go build -ldflags -s .
+  - name: build
+    image: golang:1.23
+    pull: always
+    commands:
+      - go test -v ./...
+      - CGO_ENABLED=0 go build -ldflags -s .
 
-- name: docker
-  image: plugins/docker
-  pull: always
-  settings:
-    repo: ghcr.io/rkojedzinszky/go-novncauthproxy
-    registry: ghcr.io
-    username: rkojedzinszky
-    password:
-      from_secret: ghcr.io.password
-    auto_tag: true
-    mirror:
-      from_secret: hub_docker_mirror
+  - name: docker
+    image: plugins/docker
+    pull: always
+    settings:
+      repo: ghcr.io/rkojedzinszky/go-novncauthproxy
+      registry: ghcr.io
+      username: rkojedzinszky
+      password:
+        from_secret: ghcr.io.password
+      auto_tag: true
+      mirror:
+        from_secret: hub_docker_mirror
 
-  privileged: true
-  volumes:
-    - name: docker
-      path: /var/lib/docker
+    privileged: true
+    volumes:
+      - name: docker
+        path: /var/lib/docker
 
 volumes:
   - name: docker
